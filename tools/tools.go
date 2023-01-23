@@ -801,11 +801,11 @@ func NewTools() Tools {
 	ui.Viewer.EditConfig.OnTapped = func() { ui.editJob(ui.Viewer) }
 
 	ui.Editor.Menu.OnChanged = func(s string) {
-		ui.Editor.Desc.SetText(ui.Editor.EditorConfig[s]["Desc"])
+		ui.Editor.Desc.SetText(ui.Editor.EditorConfig[s]["desc"])
 		ui.runJob(ui.Editor, s)
 	}
 	ui.Viewer.Menu.OnChanged = func(s string) {
-		ui.Viewer.Desc.SetText(ui.Viewer.EditorConfig[s]["Desc"])
+		ui.Viewer.Desc.SetText(ui.Viewer.EditorConfig[s]["desc"])
 		ui.runJob(ui.Viewer, s)
 	}
 
