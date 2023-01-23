@@ -1,63 +1,43 @@
 package main
 
 import (
-	"fmt"
-
 	"fyne.io/fyne/v2"
-	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/layout"
+	"github.com/flengure/ssh-tools-go/tools"
 )
 
-var myApp = app.New()
-var myWindow = myApp.NewWindow("ssh tools")
+// var myApp = app.New()
+
+// var myWindow = myApp.NewWindow("ssh tools")
 
 func main() {
 
-	var ui = NewTools()
-	// var modal *widget.PopUp
+	var ui = tools.NewTools()
+	ui.Window.Resize(fyne.NewSize(660, 600))
 
-	// ui.app = &a
-
-	//ui.window = ui.app.NewWindow("ssh tools")
-	myWindow.Resize(fyne.NewSize(660, 600))
-
-	r, _ := LoadResourceFromPath("icon.png")
-	myWindow.SetIcon(r)
-	// ui.window.Resize(fyne.NewSize(660, 600))
-
-	// ui.app = &myApp
-	// ui.window = &myWindow
-
-	// ui.connectBtn.Resize(fyne.NewSize(
-	// 	ui.window.Canvas().Size().Width/6,
-	// 	ui.connectBtn.MinSize().Height,
-	// ))
-	fmt.Println(myApp.Metadata().ID)
+	r, _ := tools.LoadResourceFromPath("icon.png")
+	ui.Window.SetIcon(r)
 
 	menuItem1 := fyne.NewMenuItem("New", nil)
 	menuItem3 := fyne.NewMenuItem("Save", nil)
 	// menuItem4 := fyne.NewMenuItem("Exit", nil)
 	newMenu1 := fyne.NewMenu("File",
-		menuItem1, ui.menuOpen, menuItem3)
+		menuItem1, ui.MenuOpen, menuItem3)
 	menu := fyne.NewMainMenu(newMenu1)
-	myWindow.SetMainMenu(menu)
+	ui.Window.SetMainMenu(menu)
 
-	// hdr := container.NewHBox(
-	// 	ui.editHost,
-	// 	ui.delHost,
-	// )
 	gui := container.NewBorder(
 		container.NewPadded(
 			container.NewVBox(
 				container.NewGridWithColumns(3,
-					ui.hostEntry,
-					ui.password,
-					ui.connectBtn,
+					ui.HostEntry,
+					ui.Password,
+					ui.ConnectBtn,
 				),
 				container.NewMax(
-					ui.hostDescLabel,
-					ui.hostDesc,
+					ui.HostDescLabel,
+					ui.HostDesc,
 				),
 			),
 		),
@@ -73,29 +53,29 @@ func main() {
 							container.NewGridWithColumns(2,
 								container.NewBorder(nil, nil, nil,
 									container.NewHBox(
-										ui.editor.editConfig,
-										ui.editor.delConfig,
-										// ui.editor.addConfig,
+										ui.Editor.EditConfig,
+										ui.Editor.DelConfig,
+										// ui.Editor.addConfig,
 									),
-									ui.editor.menu,
+									ui.Editor.Menu,
 								),
 								container.NewGridWithColumns(2,
 									layout.NewSpacer(),
-									ui.editor.save,
+									ui.Editor.Save,
 								),
-								ui.editor.desc,
+								ui.Editor.Desc,
 							),
 						),
 						container.NewGridWrap(
 							fyne.NewSize(660, 33),
 							container.NewMax(
-								ui.editor.status,
-								ui.editor.progress,
+								ui.Editor.Status,
+								ui.Editor.Progress,
 							),
 						),
 						nil,
 						nil,
-						ui.editor.view,
+						ui.Editor.View,
 					),
 				),
 			),
@@ -107,29 +87,29 @@ func main() {
 							container.NewGridWithColumns(2,
 								container.NewBorder(nil, nil, nil,
 									container.NewHBox(
-										ui.viewer.editConfig,
-										ui.viewer.delConfig,
-										// ui.viewer.addConfig,
+										ui.Viewer.EditConfig,
+										ui.Viewer.DelConfig,
+										// ui.Viewer.addConfig,
 									),
-									ui.viewer.menu,
+									ui.Viewer.Menu,
 								),
 								container.NewGridWithColumns(2,
 									layout.NewSpacer(),
 									layout.NewSpacer(),
 								),
-								ui.viewer.desc,
+								ui.Viewer.Desc,
 							),
 						),
 						container.NewGridWrap(
 							fyne.NewSize(660, 33),
 							container.NewMax(
-								ui.viewer.status,
-								ui.viewer.progress,
+								ui.Viewer.Status,
+								ui.Viewer.Progress,
 							),
 						),
 						nil,
 						nil,
-						ui.viewer.view,
+						ui.Viewer.View,
 					),
 				),
 			),
@@ -139,22 +119,22 @@ func main() {
 					container.NewBorder(
 						container.NewGridWithColumns(
 							3,
-							ui.helpMenu,
+							ui.HelpMenu,
 							layout.NewSpacer(),
-							ui.jsonSave,
+							ui.JsonSave,
 						),
 						container.NewGridWrap(
 							fyne.NewSize(660, 33),
 							container.NewMax(
-								ui.helpStatus,
-								ui.helpProgress,
+								ui.HelpStatus,
+								ui.HelpProgress,
 							),
 						),
 						nil,
 						nil,
 						container.NewMax(
-							container.NewVScroll(ui.helpView),
-							ui.jsonView,
+							container.NewVScroll(ui.HelpView),
+							ui.JsonView,
 						),
 					),
 				),
@@ -162,11 +142,11 @@ func main() {
 		),
 	)
 
-	myWindow.SetContent(gui)
+	ui.Window.SetContent(gui)
 
 	// ui.window = w
 
-	myWindow.ShowAndRun()
+	ui.Window.ShowAndRun()
 	// ui.window = myWindow
 
 }
